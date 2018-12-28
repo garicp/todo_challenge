@@ -48,7 +48,7 @@ end
 
 def no_record_found(num)
     list_todo
-    raise "No record found on Todo ##{num}"
+    raise "No record found on Todo ##{num}. Please choose todo from your existing todo list."
 end
 
 ARGV
