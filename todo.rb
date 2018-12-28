@@ -25,7 +25,7 @@ def list_todo
 end
 
 def update_todo(num, stat)
-    if selected_todo = Todo.all[num.to_i - 1]
+    if selected_todo = Todo.all[num.to_i - 1] && num.to_i > 0
         selected_todo.update(done: stat)
         list_todo
     else
@@ -35,7 +35,7 @@ def update_todo(num, stat)
 end
 
 def remove_todo(num)
-    if selected_todo = Todo.all[num.to_i - 1]
+    if selected_todo = Todo.all[num.to_i - 1] && num.to_i > 0
     selected_todo.destroy
     list_todo
     else
