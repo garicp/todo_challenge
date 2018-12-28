@@ -9,7 +9,7 @@ def add_todo(desc)
 end
 
 def list_todo
-    puts "No\tDescription\t\t\t\tdone"
+    puts "No\tDescription\t\t\t\tDone"
     puts "=" * 55
     all_todo = Todo.all
     all_todo.each do |t|
@@ -25,7 +25,8 @@ def list_todo
 end
 
 def update_todo(num, stat)
-    if selected_todo = Todo.all[num.to_i - 1] && num.to_i > 0
+    if num.to_i > 0
+        selected_todo = Todo.all[num.to_i - 1]
         selected_todo.update(done: stat)
         list_todo
     else
@@ -35,9 +36,10 @@ def update_todo(num, stat)
 end
 
 def remove_todo(num)
-    if selected_todo = Todo.all[num.to_i - 1] && num.to_i > 0
-    selected_todo.destroy
-    list_todo
+    if num.to_i > 0
+        selected_todo = Todo.all[num.to_i - 1]
+        selected_todo.destroy
+        list_todo
     else
         puts "No records found. Here is the full list."
         list_todo
