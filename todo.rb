@@ -27,25 +27,28 @@ def list_todo
 end
 
 def update_todo(num, stat)
-    if num.to_i > 0
+    if num.to_i > 0 && num.to_i < Todo.all.length - 1
         selected_todo = Todo.all[num.to_i - 1]
         selected_todo.update(done: stat)
         list_todo
     else
-        puts "No records found. Here is the full list."
-        list_todo
+        no_record_found(num)
     end
 end
 
 def remove_todo(num)
-    if num.to_i > 0
+    if num.to_i > 0 && num.to_i < Todo.all.length - 1
         selected_todo = Todo.all[num.to_i - 1]
         selected_todo.destroy
         list_todo
     else
-        puts "No records found. Here is the full list."
-        list_todo
+        no_record_found(num)
     end
+end
+
+def no_record_found(num)
+    list_todo
+    raise "No record found on Todo ##{num}"
 end
 
 ARGV
