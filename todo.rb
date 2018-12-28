@@ -9,17 +9,24 @@ def add_todo(desc)
 end
 
 def list_todo
-    puts "No\tDescription\t\t\tStatus"
-    puts "==============================================="
+    puts "No\tDescription\t\t\t\tdone"
+    puts "=" * 55
     all_todo = Todo.all
     all_todo.each do |t|
-        puts "#{all_todo.index(t) + 1}\t#{t.description}\t\t\t#{t.status}"
+        if t.description.length > 23
+            inter_string = "#{t.description}\t"
+        elsif t.description.length > 15
+            inter_string = "#{t.description}\t\t"
+        else
+            inter_string = "#{t.description}\t\t\t"
+        end
+        puts "#{all_todo.index(t) + 1}\t#{inter_string}\t#{t.done}"
     end
 end
 
 def update_todo(num, stat)
     if selected_todo = Todo.all[num.to_i - 1]
-        selected_todo.update(status: stat)
+        selected_todo.update(done: stat)
         list_todo
     else
         puts "No records found. Here is the full list."
@@ -47,7 +54,7 @@ when "list"
     #List all todo
     list_todo
 when "update"
-    #Update todo either description or status
+    #Update todo either description or done
     update_todo(ARGV[1], ARGV[2])
 when "remove"
     #Remove selected todo
