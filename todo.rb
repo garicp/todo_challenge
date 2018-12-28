@@ -17,8 +17,10 @@ def list_todo
             inter_string = "#{t.description}\t"
         elsif t.description.length > 15
             inter_string = "#{t.description}\t\t"
-        else
+        elsif t.description.length > 7
             inter_string = "#{t.description}\t\t\t"
+        else 
+            inter_string = "#{t.description}\t\t\t\t"
         end
         puts "#{all_todo.index(t) + 1}\t#{inter_string}\t#{t.done}"
     end
