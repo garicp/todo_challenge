@@ -17,16 +17,24 @@ def list_todo
     end
 end
 
-def update_todo(num, desc, stat)
-    selected_todo = Todo.all[num.to_i - 1]
-    selected_todo.update(description: desc, status: stat)
-    list_todo
+def update_todo(num, stat)
+    if selected_todo = Todo.all[num.to_i - 1]
+        selected_todo.update(status: stat)
+        list_todo
+    else
+        puts "No records found. Here is the full list."
+        list_todo
+    end
 end
 
 def remove_todo(num)
-    selected_todo = Todo.all[num.to_i - 1]
+    if selected_todo = Todo.all[num.to_i - 1]
     selected_todo.destroy
     list_todo
+    else
+        puts "No records found. Here is the full list."
+        list_todo
+    end
 end
 
 ARGV
@@ -40,10 +48,15 @@ when "list"
     list_todo
 when "update"
     #Update todo either description or status
-    update_todo(ARGV[1], ARGV[2], ARGV[3])
+    update_todo(ARGV[1], ARGV[2])
 when "remove"
     #Remove selected todo
     remove_todo(ARGV[1])
+when "--task"
+    puts "ruby todo.rb add <task description> === Adding new todo"
+    puts "ruby todo.rb list === List all todos"
+    puts "ruby todo.rb update <todo number> <true or false> === Update todo whether done or not"
+    puts "ruby todo.rb remove <todo number> === removes todo"
 else
-    puts "Invalid input."
+    puts "Invalid input. --task to see all available options"
 end
