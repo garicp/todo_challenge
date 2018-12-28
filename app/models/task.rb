@@ -1,3 +1,2 @@
-class Task < ActiveRecord::Base
-
+class Todo < ActiveRecord::Base
 end
